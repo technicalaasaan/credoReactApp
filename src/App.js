@@ -1,35 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import Box from './Box.js';
+import TextBox from './TextBox.js';
+import LoadData from './LoadData.js';
+import Counter from './Counter.js';
+import Custom from './Custom.js';
+// import Navbar from "./Navbar";
 
-class App extends React.Component {
-  render() {
-    return <h1> Hello { 5 + 20 } World! </h1> // jsx
-  }
-}
+// function trigger(obj) {
+//     console.log('this', obj);
+// }
+// console.log('react', React.useState, useState)
 
-function App1() {
-  // return <h1> Hello { 5 + 10 } World! </h1> // jsx
-  // return React.createElement('h1', {'id': 'samtext'}, `Hello ${5 + 10} World2!`); // without jsx
-  const a = 'prakash';
-  const html =  
-    false ? 
-    (<>
-      <h1> Hello </h1>
-      <h1> World</h1>
-      <input type="text" className='name' value='{a}' style={{'color': 'red'}} />
-    </>) : (
-      <>
-      <h1> Invalid!</h1>
-      </>
+function App({ data }) {
+    const [name, setName] = useState('prakash');
+    const [loc, setLoc] = useState('chennai');
+    const [ obj, setData ] = useState({
+        'name': 'prakash',
+        'loc': 'chennai'
+    })
+
+    useEffect(() => {
+        setData({
+            'name': 'Credo'
+        })
+    }, [name])
+    // const [ val, setValue ] = useState("");
+    // console.log('before', val);
+    // setValue(true);
+    // console.log('after', val);
+
+    return (
+        <div>
+            <span style={{ width: '20%' }}>
+                {/* <Navbar /> */}
+                <Box />
+            </span>
+            <span style={{ width: '80%' }}>
+                <h1> Welcome { data.name }! </h1>
+                <Custom />
+                {/* <TextBox />
+                <LoadData />
+                <Counter /> */}
+            </span>
+            <button onClick={() => setData({'name': 'Vignesh', 'loc': 'chennai'}) }> { obj.name === 'Credo' ? obj.name.toUpperCase(): 'Credo'} </button>
+        </div>
     )
-  
-  if (a === 'prakash') {
-    return html;
-  }
-  else {
-    return null;
-  }
 }
 
 export default App;
